@@ -8,28 +8,50 @@ internal class Program
     {
         var customers = new List<Customer>();
 
-        if (Validators.IsValidEmail("scottarchibald.42@yy"))
+        Email? email = Email.TryCreate("scottarchibald.42@yy");
+
+        if (email != null)
         {
-            customers.Add(Customer.Create("Scott", "Archibald", "scottarchibald.42@yy"));
+            customers.Add(Customer.Create("Scott", "Archibald", email));
         }
 
-        if (Validators.IsValidEmail(""))
+        email = Email.TryCreate("");
+
+        if (email != null)
         {
-            customers.Add(Customer.Create("Travis", "Brooks", ""));
+            customers.Add(Customer.Create("Travis", "Brooks", email));
         }
 
-        if (Validators.IsValidEmail("victor.erickson@gmail.com"))
+        email = Email.TryCreate("victor.erickson@gmail.com");
+
+        if (email != null)
         {
-            customers.Add(Customer.Create("Victor", "Erickson", "victor.erickson@gmail.com"));
+            customers.Add(Customer.Create("Victor", "Erickson", email));
         }
 
-        if (Validators.IsValidEmail(null))
+        email = Email.TryCreate(null);
+
+        if (email != null)
         {
-            customers.Add(Customer.Create("Thomas", "Adderiy", null));
+            customers.Add(Customer.Create("Thomas", "Adderiy", email));
         }
 
         customers.Print();
 
         Console.ReadKey();
     }
+
+    #region Hidden code
+    //static void Main()
+    //{
+    //    var email1 = Email.TryCreate("victor.erickson@gmail.com");
+
+    //    var email2 = Email.TryCreate("victor.erickson@gmail.com");
+
+    //    Console.WriteLine(email1 == email2);
+
+    //    Console.ReadKey();
+    //}
+
+    #endregion
 }
