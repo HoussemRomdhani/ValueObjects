@@ -1,4 +1,6 @@
 ﻿using ValueObjects;
+using ValueObjects.Enums;
+using ValueObjects.Examples;
 
 namespace Client1;
 
@@ -6,52 +8,38 @@ internal class Program
 {
     static void Main()
     {
-        var customers = new List<Customer>();
-
-        Email? email = Email.TryCreate("scottarchibald.42@yy");
-
-        if (email != null)
+        var product1 = new Product
         {
-            customers.Add(Customer.Create("Scott", "Archibald", email));
-        }
+            Title = "Product 1",
+            Price = Money.Create(12.76m, Currency.EUR),
+            Discount = Percentage.TenPercent,
+            Quantity = Quantity.Create(23)
+        };
 
-        email = Email.TryCreate("");
-
-        if (email != null)
+        var product2 = new Product
         {
-            customers.Add(Customer.Create("Travis", "Brooks", email));
-        }
+            Title = "Product 2",
+            Price = Money.Create(245m, Currency.EUR),
+            Discount = Percentage.ZeroPercent,
+            Quantity = Quantity.Create(5)
+        };
 
-        email = Email.TryCreate("victor.erickson@gmail.com");
-
-        if (email != null)
+        var product3 = new Product
         {
-            customers.Add(Customer.Create("Victor", "Erickson", email));
-        }
+            Title = "Product 3",
+            Price = Money.Create(15, Currency.EUR),
+            Discount = Percentage.TwentyPercent,
+            Quantity = Quantity.Create(2)
+        };
 
-        email = Email.TryCreate(null);
+        var cart = new ShoppingCart();
 
-        if (email != null)
-        {
-            customers.Add(Customer.Create("Thomas", "Adderiy", email));
-        }
+        cart.Add(product1);
+        cart.Add(product2);
+        cart.Add(product3);
 
-        customers.Print();
+        cart.Print();
 
         Console.ReadKey();
     }
-
-    #region Hidden code
-    //static void Main()
-    //{
-    //    var email1 = Email.TryCreate("victor.erickson@gmail.com");
-
-    //    var email2 = Email.TryCreate("victor.erickson@gmail.com");
-
-    //    Console.WriteLine(email1 == email2);
-
-    //    Console.ReadKey();
-    //}
-
-    #endregion
 }
